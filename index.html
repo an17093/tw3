@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html>
+<!--
+    Implement HTML5 local storage
+-->
+<head>
+    <title>Termwork 3</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+        .storage-value {
+            font-weight: bold;
+            color: blueviolet;
+        }
+
+        .storage-error {
+            font-weight: bold;
+            color: red;
+        }
+
+        body {
+            padding-left: 40px;
+            padding-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <h3 id="usn" class="storage-value">2GIXXYYZZZ</h3>
+    <h4 id="visit-count-line">This page was visited <span id="visit-count" class="storage-value">X</span> times.</h4>
+</body>
+
+<script>
+    function isStorageSupported() {
+        return typeof (Storage) !== "undefined";
+    }
+
+    $(document).ready(function (e) {
+        if (isStorageSupported()) {
+            if (!localStorage.getItem("usn"))
+                localStorage.setItem("usn", "2gi20cs133");
+            localStorage.setItem("visit-count", parseInt(localStorage.getItem("visit-count") ?? "0") + 1);
+
+            document.getElementById("usn").textContent = localStorage.getItem("usn");
+            document.getElementById("visit-count").textContent = localStorage.getItem("visit-count");
+        } else
+            document.body.innerHTML = "<h3 class=\"storage-error\">Sorry! Your browser does not support.</h3>";
+    });
+</script>
+
+</html>
